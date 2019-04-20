@@ -8,6 +8,7 @@ import { UserList } from './Components/BaseComponents'
 import User from './Components/User'
 import MessageForm from './Components/MessageForm'
 import MessagesBox from './Components/MessagesBox'
+import Login from './Components/Login'
 
 const MainContainer = styled.div`
   height: 100vh;
@@ -21,7 +22,7 @@ const LeftBox = styled.div`
   background-color: green;
   width: 80%;
   height: 90vh;
-  display: flex;
+  overflow: hidden;
 `
 const RightBox = styled.div`
   background-color: grey;
@@ -32,6 +33,7 @@ const RightBox = styled.div`
 const WebChat = props => {
   const [messagesList, setMessageList] = useState([])
   const [messageValue, setMessageValue] = useState('')
+  const [hiddeLogin, setHideLogin] = useState(false)
   const updateList = (messageToAdd) => {
     setMessageList(messagesList.concat(messageToAdd))
   }
@@ -52,6 +54,9 @@ const WebChat = props => {
 
   return (
       <MainContainer>
+       { 
+         !hiddeLogin &&  <Login setHideLogin={setHideLogin}/>
+       }
       <LeftBox>
         <MessagesBox messagesList={messagesList}/>
         <MessageForm  messageValue={messageValue} sendMessage={sendMessage} handleChange={handleChange}/>

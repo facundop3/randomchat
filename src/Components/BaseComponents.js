@@ -3,8 +3,7 @@ import styled from 'styled-components'
 const Message = styled.div``
 
 const UserList = styled.ul`
-  width: 100%;
-  border: 1px solid red;
+  width: calc(100% - 2em);
   padding: 1em;
 `
 

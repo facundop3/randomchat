@@ -8,9 +8,8 @@ const InputMessage = styled.input`
   padding: 1em;
 `;
 const MessageContainer = styled.form`
-  height: 3em;
+  height: 10%;
   width: 100%;
-  align-self: flex-end;
 `;
 const MessageForm = props => {
   const {sendMessage, messageValue, handleChange} = props
