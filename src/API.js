@@ -8,4 +8,4 @@ function suscribeToMessages(callback) {
 function sendMessage(newMessage){
   socket.emit('new-message', newMessage)
 }
-export { suscribeToMessages, sendMessage }
+export default { suscribeToMessages, sendMessage }

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 //Api
-import { suscribeToMessages, sendMessage } from './API'
+import API from './API'
 
 // Components
 import { UserList } from './Components/BaseComponents'
@@ -29,39 +29,32 @@ const RightBox = styled.div`
   height: 90vh;
 `;
 
-class WebChat extends React.Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      messagesList: [],
-      messageValue: ''
-    }
-    suscribeToMessages((newMessage)=> this.setState(prevState =>({
-        messagesList: [...prevState.messagesList, newMessage]
-      })
-     )
-    )
+const WebChat = props => {
+  const [messagesList, setMessageList] = useState([])
+  const [messageValue, setMessageValue] = useState('')
+  const updateList = (messageToAdd) => {
+    setMessageList(messagesList.concat(messageToAdd))
   }
 
+  useEffect(()=>{
+    API.suscribeToMessages(updateList)
+  }, [messagesList])
 
-  sendMessage =  ev =>{
+  const sendMessage =  ev =>{
     ev.preventDefault()
-    console.log(this.state.messageValue)
-    sendMessage(this.state.messageValue)
+    API.sendMessage(messageValue)
+    setMessageValue('')
+
   }
-  setMessageValue = ({target:{value}})=>{
-    this.setState(prevState=> ({
-      ...prevState,
-      messageValue: value
-    }))
+  const handleChange = ({target:{value}})=>{
+      setMessageValue(value)
   }
 
-  render(){
-    return (
+  return (
       <MainContainer>
       <LeftBox>
-        <MessagesBox messagesList={this.state.messagesList}/>
-        <MessageForm  messageValue={this.state.messageValue} sendMessage={this.sendMessage} setMessageValue={this.setMessageValue}/>
+        <MessagesBox messagesList={messagesList}/>
+        <MessageForm  messageValue={messageValue} sendMessage={sendMessage} handleChange={handleChange}/>
       </LeftBox>
       <RightBox>
         <UserList>
@@ -72,6 +65,6 @@ class WebChat extends React.Component{
       </RightBox>
     </MainContainer>
     )
-  }
 }
+
 export default WebChat

@@ -13,12 +13,12 @@ const MessageContainer = styled.form`
   align-self: flex-end;
 `;
 const MessageForm = props => {
-  const {sendMessage, messageValue, setMessageValue} = props
+  const {sendMessage, messageValue, handleChange} = props
   return (
     <MessageContainer onSubmit={sendMessage}>
       <InputMessage type="text" 
         placeholder="Input your message" 
-        onChange={setMessageValue} 
+        onChange={handleChange} 
         value={messageValue}/>
     </MessageContainer>
   )
