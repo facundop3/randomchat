@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import API from '../API'
 
 import MessageForm from './MessageForm'
+import DragAndDrop from './DragAndDrop'
 
 const ChatHeadder= styled.div`
   height: 1em;
@@ -42,22 +43,27 @@ const PrivateChat = props =>{
   const sendMessage = ev =>{
     ev.preventDefault()
     const messageObj = {id, message: messageValue}
-    API.sendPrivateMessage(messageObj)
+    // API.sendPrivateMessage(messageObj)
+    console.log("This is private")
+    console.log(messageObj)
     setMessageValue('')
   }
 
   return (
+    
+    <DragAndDrop x={100} y={100} >
     <Container>
       <ChatHeadder> 
         <span>{username}</span>
         <span onClick={handleClose}>Close</span>
       </ChatHeadder>
       <ChatMessages>Frulali frulala</ChatMessages>
-      <MessageForm 
+      <MessageForm
         messageValue={messageValue} 
         handleChange={handleChange}
         sendMessage={sendMessage} />
     </Container>
+  </DragAndDrop>
   )
 }
 

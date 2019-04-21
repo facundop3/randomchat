@@ -10,6 +10,7 @@ import MessageForm from './Components/MessageForm'
 import MessagesBox from './Components/MessagesBox'
 import Login from './Components/Login'
 import PrivateChat from './Components/PrivateChat'
+import SearchUser from './Components/SearchUser';
 
 const MainContainer = styled.div`
   height: 100vh;
@@ -34,18 +35,28 @@ const RightBox = styled.div`
 const WebChat = props => {
   const [messagesList, setMessageList] = useState([])
   const [usersList, setUsersList] = useState([])
+  const [filteredUsersList, setFilteredUsersList] = useState([])
   const [privateMessagesList, setPrivateMessagesList] = useState([])
   const [messageValue, setMessageValue] = useState('')
+  const [searchUserValue, setSearchUserValue] = useState('')
   const [hiddeLogin, setHideLogin] = useState(false)
   const [userId, setUserId] = useState('')
+
   const updateMessagesList = (messageToAdd) => {
     setMessageList(messagesList.concat(messageToAdd))
   }
+
   const updateUsersList = (newUsersList) => {
     setUsersList(newUsersList)
   }
+
   const updatePrivateMessagesList = (newPrivateMessafes)=>{
     setPrivateMessagesList(privateMessagesList.concat(newPrivateMessafes))
+  }
+
+  const handleSearchUserChange = ({target:{value: username}}) => {
+    setSearchUserValue(username)
+    setFilteredUsersList(usersList.filter(({username}) => username.includes(searchUserValue)))
   }
 
   useEffect(()=>{
@@ -94,9 +105,10 @@ const WebChat = props => {
         <MessageForm  messageValue={messageValue} sendMessage={sendMessage} handleChange={handleChange}/>
       </LeftBox>
       <RightBox>
+        <SearchUser handleChange={handleSearchUserChange} inputValue={searchUserValue}/>
         <UserList>
           {
-            usersList.map(({username, id})=> <User username={username} handleClick={handleUserClick} id={id}/>)
+            filteredUsersList.map(({username, id})=> <User username={username} handleClick={handleUserClick} id={id}/>)
           }
         </UserList>
       </RightBox>
