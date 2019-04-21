@@ -107,8 +107,8 @@ const WebChat = props => {
         <UserList>
           {
             usersList.filter(({username}) => 
-              username.toLowerCase().includes(searchUserValue.toLowerCase())).map(({username, id})=> 
-                <User username={username} handleClick={handleUserClick} id={id}/>)
+              username && username.toLowerCase().includes(searchUserValue.toLowerCase())).map(({username, id})=> 
+                 <User username={username} handleClick={handleUserClick} id={id}/>)
           }
         </UserList>
       </RightBox>

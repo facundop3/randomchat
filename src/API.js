@@ -17,8 +17,8 @@ function suscribeToPrivateMessages(callback){
   socket.on('new-private-message', newPrivateMessages => callback(newPrivateMessages))
 }
 
-function registerUser(userName){
-  socket.emit('new-username', userName)
+function registerUser(username){
+  socket.emit('new-username', username)
 }
 
 function suscribeToUsers(callback){
