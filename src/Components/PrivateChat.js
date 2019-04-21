@@ -23,7 +23,7 @@ const Container = styled.div`
     background-color: grey;
 `
 
-const ChatMessages = styled.p`
+const ChatMessages = styled.div`
   height: calc(90% - 1em);
   width: calc(100% - 1em);
   margin: 0%;
@@ -39,7 +39,6 @@ const PrivateChat = props =>{
   const handleChange = ev=>{
     setMessageValue(ev.target.value)
   }
-
   const sendMessage = ev =>{
     ev.preventDefault()
     const messageObj = {id, message: messageValue}
@@ -58,7 +57,7 @@ const PrivateChat = props =>{
         <span onClick={handleClose}>Close</span>
       </ChatHeadder>
       <ChatMessages>
-       {messages && messages.map(message => <MessageText>{message}</MessageText>)}
+       {messages && messages.map(message => <MessageText key={Date.now()}>{message}</MessageText>)}
       </ChatMessages>
 
       <MessageForm

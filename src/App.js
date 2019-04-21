@@ -56,7 +56,8 @@ const WebChat = props => {
     } else {
       privateChatsObj[newPrivateChat.id] = {
         messages: [newPrivateChat.message],
-        username: newPrivateChat.username
+        username: newPrivateChat.username,
+        id: newPrivateChat.id
       }
       SetPrivateChatsObj(privateChatsObj)
     }
@@ -88,17 +89,22 @@ const WebChat = props => {
       setMessageValue(value)
   }
 
-  const handleUserClick = id =>{
-    setSelectedUser(id)
+  const handleUserClick = user =>{
+    setSelectedUser(user)
+    if(! privateChatsObj[user.id]){
+      privateChatsObj[user.id] = {
+        messages: [],
+        username: user.username,
+        id: user.id
+      }
+      SetPrivateChatsObj(privateChatsObj)
+    }
   }
 
   return (
       <MainContainer>
         {
-         selectedUser.id &&  <PrivateChat userObject={selectedUser}/>
-        }
-        {
-         Object.keys(privateChatsObj).map(chatId=> privateChatsObj[chatId] && <PrivateChat userObject={privateChatsObj[chatId]}/>) 
+         Object.keys(privateChatsObj).map(chatId=> privateChatsObj[chatId] && <PrivateChat userObject={privateChatsObj[chatId]} />) 
         }
        { 
          !hiddeLogin &&  <Login setHideLogin={setHideLogin}/>

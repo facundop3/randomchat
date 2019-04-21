@@ -10,7 +10,6 @@ const InputMessage = styled.input`
 const MessageContainer = styled.form`
   height: 10%;
   width: 100%;
-  z-index: 2;
 `;
 const MessageForm = props => {
   const {sendMessage, messageValue, handleChange} = props
