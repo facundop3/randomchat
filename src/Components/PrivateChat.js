@@ -31,7 +31,7 @@ const ChatMessages = styled.p`
 `
 
 const PrivateChat = props =>{
-  const {userObject:{id, message, username}} = props
+  const {userObject:{id, messages, username}} = props
   const [messageValue, setMessageValue] = useState('')
   const handleClose = ev =>{
     console.log("Close it")
@@ -44,11 +44,11 @@ const PrivateChat = props =>{
     ev.preventDefault()
     const messageObj = {id, message: messageValue}
     API.sendPrivateMessage(messageObj)
-    console.log("This is private")
-    console.log(messageObj)
     setMessageValue('')
   }
-
+  const MessageText = styled.p`
+    display: block;
+  `
   return (
     
     <DragAndDrop x={100} y={100} >
@@ -57,7 +57,10 @@ const PrivateChat = props =>{
         <span>{username}</span>
         <span onClick={handleClose}>Close</span>
       </ChatHeadder>
-      <ChatMessages>{message}</ChatMessages>
+      <ChatMessages>
+       {messages && messages.map(message => <MessageText>{message}</MessageText>)}
+      </ChatMessages>
+
       <MessageForm
         messageValue={messageValue} 
         handleChange={handleChange}

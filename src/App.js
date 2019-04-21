@@ -35,11 +35,11 @@ const RightBox = styled.div`
 const WebChat = props => {
   const [messagesList, setMessageList] = useState([])
   const [usersList, setUsersList] = useState([])
-  const [privateMessagesList, setPrivateMessagesList] = useState([])
+  const [privateChatsObj, SetPrivateChatsObj] = useState({})
   const [messageValue, setMessageValue] = useState('')
   const [searchUserValue, setSearchUserValue] = useState('')
   const [hiddeLogin, setHideLogin] = useState(false)
-  const [userId, setUserId] = useState('')
+  const [selectedUser, setSelectedUser] = useState({})
 
   const updateMessagesList = (messageToAdd) => {
     setMessageList(messagesList.concat(messageToAdd))
@@ -49,8 +49,17 @@ const WebChat = props => {
     setUsersList(newUsersList)
   }
 
-  const updatePrivateMessagesList = (newPrivateMessafes)=>{
-    setPrivateMessagesList(privateMessagesList.concat(newPrivateMessafes))
+  const  updatePrivateChatsList = (newPrivateChat)=>{
+    if(privateChatsObj[newPrivateChat.id]){
+      privateChatsObj[newPrivateChat.id].messages.push(newPrivateChat.message)
+      SetPrivateChatsObj(privateChatsObj)
+    } else {
+      privateChatsObj[newPrivateChat.id] = {
+        messages: [newPrivateChat.message],
+        username: newPrivateChat.username
+      }
+      SetPrivateChatsObj(privateChatsObj)
+    }
   }
 
   const handleSearchUserChange = ({target:{value: username}}) => {
@@ -66,8 +75,8 @@ const WebChat = props => {
   }, [usersList])
 
   useEffect(()=>{
-    API.suscribeToPrivateMessages(updatePrivateMessagesList)
-  }, [privateMessagesList])
+    API.suscribeToPrivateMessages(updatePrivateChatsList)
+  }, [privateChatsObj])
 
   const sendMessage =  ev =>{
     ev.preventDefault()
@@ -80,20 +89,16 @@ const WebChat = props => {
   }
 
   const handleUserClick = id =>{
-    console.log(id)
-    setUserId(id)
+    setSelectedUser(id)
   }
 
   return (
       <MainContainer>
         {
-         userId && <PrivateChat userObject={usersList.find(({id})=> id === userId)}/>
+         selectedUser.id &&  <PrivateChat userObject={selectedUser}/>
         }
         {
-         privateMessagesList.map(userObj=>  {
-           console.log(userObj)
-         return <PrivateChat userObject={userObj}/>
-        }) 
+         Object.keys(privateChatsObj).map(chatId=> privateChatsObj[chatId] && <PrivateChat userObject={privateChatsObj[chatId]}/>) 
         }
        { 
          !hiddeLogin &&  <Login setHideLogin={setHideLogin}/>

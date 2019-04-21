@@ -18,7 +18,7 @@ const Container = styled.li`
 const User = props => {
   const{img, username, handleClick, id} = props
   const startPrivateChat = ()=>{
-    handleClick(id)
+    handleClick({id, username})
   }
   return (
     <Container onClick={startPrivateChat}>
