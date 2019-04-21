@@ -9,6 +9,7 @@ import User from './Components/User'
 import MessageForm from './Components/MessageForm'
 import MessagesBox from './Components/MessagesBox'
 import Login from './Components/Login'
+import PrivateChat from './Components/PrivateChat'
 
 const MainContainer = styled.div`
   height: 100vh;
@@ -32,15 +33,32 @@ const RightBox = styled.div`
 
 const WebChat = props => {
   const [messagesList, setMessageList] = useState([])
+  const [usersList, setUsersList] = useState([])
+  const [privateMessagesList, setPrivateMessagesList] = useState([])
   const [messageValue, setMessageValue] = useState('')
   const [hiddeLogin, setHideLogin] = useState(false)
-  const updateList = (messageToAdd) => {
+  const [userId, setUserId] = useState('')
+  const updateMessagesList = (messageToAdd) => {
     setMessageList(messagesList.concat(messageToAdd))
+  }
+  const updateUsersList = (newUsersList) => {
+    setUsersList(newUsersList)
+  }
+  const updatePrivateMessagesList = (newPrivateMessafes)=>{
+    setPrivateMessagesList(privateMessagesList.concat(newPrivateMessafes))
   }
 
   useEffect(()=>{
-    API.suscribeToMessages(updateList)
+    API.suscribeToMessages(updateMessagesList)
   }, [messagesList])
+
+  useEffect(()=>{
+    API.suscribeToUsers(updateUsersList)
+  }, [usersList])
+
+  useEffect(()=>{
+    API.suscribeToPrivateMessages(updatePrivateMessagesList)
+  }, [privateMessagesList])
 
   const sendMessage =  ev =>{
     ev.preventDefault()
@@ -52,8 +70,22 @@ const WebChat = props => {
       setMessageValue(value)
   }
 
+  const handleUserClick = id =>{
+    console.log(id)
+    setUserId(id)
+  }
+
   return (
       <MainContainer>
+        {
+         userId && <PrivateChat userObject={usersList.find(({id})=> id === userId)}/>
+        }
+        {
+         privateMessagesList.map(userObj=>  {
+           console.log(userObj)
+         return <PrivateChat userObject={userObj}/>
+        }) 
+        }
        { 
          !hiddeLogin &&  <Login setHideLogin={setHideLogin}/>
        }
@@ -63,9 +95,9 @@ const WebChat = props => {
       </LeftBox>
       <RightBox>
         <UserList>
-          <User username="Facup3" img="https://images.pexels.com/photos/2122170/pexels-photo-2122170.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"/>
-          <User username="Facup3" img="https://images.pexels.com/photos/2122170/pexels-photo-2122170.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"/>
-          <User username="Facup3" img="https://images.pexels.com/photos/2122170/pexels-photo-2122170.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"/>
+          {
+            usersList.map(({username, id})=> <User username={username} handleClick={handleUserClick} id={id}/>)
+          }
         </UserList>
       </RightBox>
     </MainContainer>

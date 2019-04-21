@@ -16,10 +16,14 @@ const Container = styled.li`
   display: flex;
 `
 const User = props => {
+  const{img, username, handleClick, id} = props
+  const startPrivateChat = ()=>{
+    handleClick(id)
+  }
   return (
-    <Container>
-      <Avatar img={props.img}/>
-      <p>{props.username}</p>
+    <Container onClick={startPrivateChat}>
+      <Avatar img={img}/>
+      <p>{username}</p>
     </Container>
   )
 }
