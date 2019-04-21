@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
-const InputSearch =  styled.input``;
+const InputSearch =  styled.input`
+  width: 100%;
+`;
 
 
 const SearchUser = props =>{

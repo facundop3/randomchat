@@ -35,7 +35,6 @@ const RightBox = styled.div`
 const WebChat = props => {
   const [messagesList, setMessageList] = useState([])
   const [usersList, setUsersList] = useState([])
-  const [filteredUsersList, setFilteredUsersList] = useState([])
   const [privateMessagesList, setPrivateMessagesList] = useState([])
   const [messageValue, setMessageValue] = useState('')
   const [searchUserValue, setSearchUserValue] = useState('')
@@ -56,7 +55,6 @@ const WebChat = props => {
 
   const handleSearchUserChange = ({target:{value: username}}) => {
     setSearchUserValue(username)
-    setFilteredUsersList(usersList.filter(({username}) => username.includes(searchUserValue)))
   }
 
   useEffect(()=>{
@@ -108,7 +106,9 @@ const WebChat = props => {
         <SearchUser handleChange={handleSearchUserChange} inputValue={searchUserValue}/>
         <UserList>
           {
-            filteredUsersList.map(({username, id})=> <User username={username} handleClick={handleUserClick} id={id}/>)
+            usersList.filter(({username}) => 
+              username.toLowerCase().includes(searchUserValue.toLowerCase())).map(({username, id})=> 
+                <User username={username} handleClick={handleUserClick} id={id}/>)
           }
         </UserList>
       </RightBox>
