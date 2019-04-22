@@ -20,7 +20,6 @@ const Container = styled.div`
     width: 30vw ;
     position: absolute;
     display: block;
-    background-color: grey;
 `
 
 const ChatMessages = styled.div`
@@ -28,11 +27,13 @@ const ChatMessages = styled.div`
   width: calc(100% - 1em);
   margin: 0%;
   padding: .5em;
+  background-color: grey;
 `
 
 const PrivateChat = props =>{
   const {userObject:{id, messages, username}} = props
   const [messageValue, setMessageValue] = useState('')
+  const [isMinimized, setIsMinimized] = useState(false)
   const handleClose = ev =>{
     console.log("Close it")
   }
@@ -45,6 +46,11 @@ const PrivateChat = props =>{
     API.sendPrivateMessage(messageObj)
     setMessageValue('')
   }
+
+  const handleMin = ev =>{
+    console.log('Min please')
+    setIsMinimized(!isMinimized)
+  }
   const MessageText = styled.p`
     display: block;
   `
@@ -54,16 +60,24 @@ const PrivateChat = props =>{
     <Container>
       <ChatHeadder> 
         <span>{username}</span>
-        <span onClick={handleClose}>Close</span>
+        <div>
+          <span onClick={handleMin}> - </span>
+          <span onClick={handleClose}> X </span>
+        </div>
       </ChatHeadder>
-      <ChatMessages>
-       {messages && messages.map(message => <MessageText key={Date.now()}>{message}</MessageText>)}
-      </ChatMessages>
+      {
 
-      <MessageForm
-        messageValue={messageValue} 
-        handleChange={handleChange}
-        sendMessage={sendMessage} />
+       !isMinimized && <div>
+                          <ChatMessages>
+                            {messages && messages.map(message => <MessageText key={Date.now()}>{message}</MessageText>)}
+                          </ChatMessages>
+
+                          <MessageForm
+                            messageValue={messageValue} 
+                            handleChange={handleChange}
+                            sendMessage={sendMessage} />
+                        </div>         
+      }
     </Container>
   </DragAndDrop>
   )
