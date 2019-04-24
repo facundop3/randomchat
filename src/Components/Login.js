@@ -7,6 +7,7 @@ const Container = styled.div`
   border-radius: 5px;
   padding: 1em;
   position: absolute;
+  box-shadow: 4px 3px 4px rgba(0, 0, 0, 0.4);
 `
 const LoginTitle = styled.h1`
   text-align: center;
@@ -18,6 +19,8 @@ const InputUsername = styled.input`
   height: 2em;
   text-align: center;
   font-size: 1em;
+  border:0;
+  outline: none;
 `
 
 const Login = props => {
@@ -33,7 +36,7 @@ const Login = props => {
 
   return (
     <Container>
-      <LoginTitle>Enter your username</LoginTitle>
+      <LoginTitle>Enter your nickname</LoginTitle>
       <form onSubmit={handleSubmit}>
         <InputUsername value={inputValue} onChange={({target:{value}})=> setInputValue(value)} placeholder="Username"/>
       </form>

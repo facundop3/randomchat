@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import API from '../API'
 
 import MessageForm from './MessageForm'
@@ -32,19 +32,13 @@ const ChatMessages = styled.div`
 
 const PrivateChat = props =>{
   const {userObject:{id, messages, username}} = props
-  const [messageValue, setMessageValue] = useState('')
   const [isMinimized, setIsMinimized] = useState(false)
   const handleClose = ev =>{
     console.log("Close it")
   }
-  const handleChange = ev=>{
-    setMessageValue(ev.target.value)
-  }
-  const sendMessage = ev =>{
-    ev.preventDefault()
+  const sendMessage = messageValue =>{
     const messageObj = {id, message: messageValue}
     API.sendPrivateMessage(messageObj)
-    setMessageValue('')
   }
 
   const handleMin = ev =>{
@@ -61,8 +55,15 @@ const PrivateChat = props =>{
       <ChatHeadder> 
         <span>{username}</span>
         <div>
-          <span onClick={handleMin}> - </span>
-          <span onClick={handleClose}> X </span>
+          <FontAwesomeIcon
+          icon="window-minimize"
+          onClick={handleMin}
+          style={{marginRight: ".5em"}}
+          />
+          <FontAwesomeIcon
+          icon="times"
+          onClick={handleClose}
+          />
         </div>
       </ChatHeadder>
       {
@@ -73,9 +74,9 @@ const PrivateChat = props =>{
                           </ChatMessages>
 
                           <MessageForm
-                            messageValue={messageValue} 
-                            handleChange={handleChange}
-                            sendMessage={sendMessage} />
+                            cleanAfter
+                            sendMessage={sendMessage} 
+                          />
                         </div>         
       }
     </Container>

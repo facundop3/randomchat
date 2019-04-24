@@ -10,18 +10,18 @@ import MessageForm from './Components/MessageForm'
 import MessagesBox from './Components/MessagesBox'
 import Login from './Components/Login'
 import PrivateChat from './Components/PrivateChat'
-import SearchUser from './Components/SearchUser';
+import SearchUser from './Components/SearchUser'
+import SweetChatBubble from './Components/SweetChatBubble'
 
 const MainContainer = styled.div`
   height: 100vh;
-  background: #92b3e8;
+  background: #e6ecf0;
   display: flex;
   align-items: center;
   justify-content: center;
 `
 
 const LeftBox = styled.div`
-  background-color: green;
   width: 80%;
   height: 90vh;
   overflow: hidden;
@@ -36,7 +36,6 @@ const WebChat = props => {
   const [messagesList, setMessageList] = useState([])
   const [usersList, setUsersList] = useState([])
   const [privateChatsObj, SetPrivateChatsObj] = useState({})
-  const [messageValue, setMessageValue] = useState('')
   const [searchUserValue, setSearchUserValue] = useState('')
   const [hiddeLogin, setHideLogin] = useState(false)
   const [selectedUser, setSelectedUser] = useState({})
@@ -79,14 +78,9 @@ const WebChat = props => {
     API.suscribeToPrivateMessages(updatePrivateChatsList)
   }, [privateChatsObj])
 
-  const sendMessage =  ev =>{
-    ev.preventDefault()
+  const sendMessage =  messageValue =>{
     API.sendMessage(messageValue)
-    setMessageValue('')
 
-  }
-  const handleChange = ({target:{value}})=>{
-      setMessageValue(value)
   }
 
   const handleUserClick = user =>{
@@ -110,8 +104,10 @@ const WebChat = props => {
          !hiddeLogin &&  <Login setHideLogin={setHideLogin}/>
        }
       <LeftBox>
-        <MessagesBox messagesList={messagesList}/>
-        <MessageForm  messageValue={messageValue} sendMessage={sendMessage} handleChange={handleChange}/>
+      <SweetChatBubble/>
+      <SweetChatBubble leftMessage/>
+        {/* <MessagesBox messagesList={messagesList}/> */}
+        <MessageForm  sendMessage={sendMessage} />
       </LeftBox>
       <RightBox>
         <SearchUser handleChange={handleSearchUserChange} inputValue={searchUserValue}/>

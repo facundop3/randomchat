@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+// Font Awesome stuff 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faTimes, faPaperPlane, faWindowMinimize } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faTimes, faPaperPlane,faWindowMinimize)
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

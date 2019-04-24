@@ -1,5 +1,5 @@
 import openSocket from 'socket.io-client'
-const  socket = openSocket('http://192.168.1.48:3030')
+const  socket = openSocket('http://localhost:3030')
 
 function suscribeToMessages(callback) {
   socket.on('new-message', newMessage => callback(newMessage))
