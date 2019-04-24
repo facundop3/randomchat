@@ -5,6 +5,7 @@ import API from '../API'
 
 import MessageForm from './MessageForm'
 import DragAndDrop from './DragAndDrop'
+import SweetChatBubble from './SweetChatBubble'
 
 const ChatHeadder= styled.div`
   height: 1em;
@@ -32,22 +33,20 @@ const ChatMessages = styled.div`
 
 const PrivateChat = props =>{
   const {userObject:{id, messages, username}} = props
+  console.log(props)
   const [isMinimized, setIsMinimized] = useState(false)
   const handleClose = ev =>{
     console.log("Close it")
   }
   const sendMessage = messageValue =>{
-    const messageObj = {id, message: messageValue}
+    const messageObj = {id, message: {content:messageValue, isOutbound:true}}
     API.sendPrivateMessage(messageObj)
   }
 
   const handleMin = ev =>{
-    console.log('Min please')
     setIsMinimized(!isMinimized)
   }
-  const MessageText = styled.p`
-    display: block;
-  `
+
   return (
     
     <DragAndDrop x={100} y={100} >
@@ -70,7 +69,13 @@ const PrivateChat = props =>{
 
        !isMinimized && <div>
                           <ChatMessages>
-                            {messages && messages.map(message => <MessageText key={Date.now()}>{message}</MessageText>)}
+                            {messages && messages.map(({content, isOutbound}, index, list) => 
+                                <SweetChatBubble 
+                                  key={Date.now()} 
+                                  message={content} 
+                                  isSecond={index && Boolean(isOutbound) === Boolean(list[index -1].isOutbound)} 
+                                  isLeft={!isOutbound}/>
+                              )}
                           </ChatMessages>
 
                           <MessageForm

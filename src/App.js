@@ -11,7 +11,6 @@ import MessagesBox from './Components/MessagesBox'
 import Login from './Components/Login'
 import PrivateChat from './Components/PrivateChat'
 import SearchUser from './Components/SearchUser'
-import SweetChatBubble from './Components/SweetChatBubble'
 
 const MainContainer = styled.div`
   height: 100vh;
@@ -25,6 +24,7 @@ const LeftBox = styled.div`
   width: 80%;
   height: 90vh;
   overflow: hidden;
+  background-color: white;
 `
 const RightBox = styled.div`
   background-color: grey;
@@ -42,6 +42,7 @@ const WebChat = props => {
 
   const updateMessagesList = (messageToAdd) => {
     setMessageList(messagesList.concat(messageToAdd))
+    console.log(messagesList)
   }
 
   const updateUsersList = (newUsersList) => {
@@ -104,9 +105,7 @@ const WebChat = props => {
          !hiddeLogin &&  <Login setHideLogin={setHideLogin}/>
        }
       <LeftBox>
-      <SweetChatBubble/>
-      <SweetChatBubble leftMessage/>
-        {/* <MessagesBox messagesList={messagesList}/> */}
+        <MessagesBox messagesList={messagesList}/>
         <MessageForm  sendMessage={sendMessage} />
       </LeftBox>
       <RightBox>
