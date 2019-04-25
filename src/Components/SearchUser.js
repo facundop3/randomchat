@@ -1,20 +1,20 @@
 import React from 'react'
-import styled from 'styled-components'
-
-const InputSearch =  styled.input`
-  width: 100%;
-`;
-
+import SweetInput from './SweetInput'
 
 const SearchUser = props =>{
 
-  const {handleChange, inputValue} = props
-  return (
-    <InputSearch  
-      value={inputValue}
-      onChange={handleChange}
-      placeholder="Search user"/>
-  )
+  const {handleChange, inputValue, bgColor} = props
+
+  return  <SweetInput
+            hotAction
+            bgColor={bgColor}
+            hotValue={inputValue}
+            handleChange={handleChange}
+            placeholder="Search user"
+            faIcon="search"
+            iconColor="#66757f"
+          />
+
 }
 
 export default SearchUser

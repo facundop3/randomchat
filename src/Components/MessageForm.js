@@ -7,7 +7,8 @@ const MessageForm = props => {
     <SweetInput 
       handleSubmit={sendMessage}
       cleanAfter
-      placeholder="Input your message" 
+      placeholder="Input your message"
+      bgColor="lightblue"
     />
   )
 }

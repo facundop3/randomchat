@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React from 'react'
 import API from '../API'
 import styled from 'styled-components'
+
+import SweetInput from './SweetInput'
 
 const Container = styled.div`
   background-color: #fff;
@@ -13,21 +15,10 @@ const LoginTitle = styled.h1`
   text-align: center;
 `
 
-const InputUsername = styled.input`
-  border-radius: 5px;
-  width: 100%;
-  height: 2em;
-  text-align: center;
-  font-size: 1em;
-  border:0;
-  outline: none;
-`
-
 const Login = props => {
 
-  const [inputValue, setInputValue] = useState('')
-  const handleSubmit = ev => {
-    ev.preventDefault();
+  const handleSubmit = inputValue => {
+
     if(inputValue){
       API.registerUser(inputValue) 
     }
@@ -37,9 +28,12 @@ const Login = props => {
   return (
     <Container>
       <LoginTitle>Enter your nickname</LoginTitle>
-      <form onSubmit={handleSubmit}>
-        <InputUsername value={inputValue} onChange={({target:{value}})=> setInputValue(value)} placeholder="Username"/>
-      </form>
+      <SweetInput 
+        placeholder="Sally Ride"
+        handleSubmit={handleSubmit}
+        faIcon="user-astronaut"
+        iconColor="#95ca3e"
+      />
     </Container>
   )
 
