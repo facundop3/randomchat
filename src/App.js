@@ -40,6 +40,10 @@ const WebChat = props => {
   const [hiddeLogin, setHideLogin] = useState(false)
   const [selectedUser, setSelectedUser] = useState({})
 
+  const closePrivatChat = id => {
+    delete privateChatsObj[id]
+    SetPrivateChatsObj({...privateChatsObj})
+  }
   const updateMessagesList = (messageToAdd) => {
     setMessageList(messagesList.concat(messageToAdd))
     console.log(messagesList)
@@ -99,7 +103,7 @@ const WebChat = props => {
   return (
       <MainContainer>
         {
-         Object.keys(privateChatsObj).map(chatId=> privateChatsObj[chatId] && <PrivateChat userObject={privateChatsObj[chatId]} />) 
+         Object.keys(privateChatsObj).map(chatId=> privateChatsObj[chatId] && <PrivateChat userObject={privateChatsObj[chatId]}  handleClose={closePrivatChat}/>) 
         }
        { 
          !hiddeLogin &&  <Login setHideLogin={setHideLogin}/>

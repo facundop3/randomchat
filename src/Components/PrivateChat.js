@@ -32,12 +32,8 @@ const ChatMessages = styled.div`
 `
 
 const PrivateChat = props =>{
-  const {userObject:{id, messages, username}} = props
-  console.log(props)
+  const {userObject:{id, messages, username}, handleClose} = props
   const [isMinimized, setIsMinimized] = useState(false)
-  const handleClose = ev =>{
-    console.log("Close it")
-  }
   const sendMessage = messageValue =>{
     const messageObj = {id, message: {content:messageValue, isOutbound:true}}
     API.sendPrivateMessage(messageObj)
@@ -46,7 +42,9 @@ const PrivateChat = props =>{
   const handleMin = ev =>{
     setIsMinimized(!isMinimized)
   }
-
+  const handleCloseClick = ()=>{
+    handleClose(id)
+  }
   return (
     <DragAndDrop x={100} y={100} >
     <Container>
@@ -60,7 +58,7 @@ const PrivateChat = props =>{
           />
           <FontAwesomeIcon
           icon="times"
-          onClick={handleClose}
+          onClick={handleCloseClick}
           />
         </div>
       </ChatHeadder>
