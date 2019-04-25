@@ -27,7 +27,7 @@ const LeftBox = styled.div`
   background-color: white;
 `
 const RightBox = styled.div`
-  background-color: grey;
+  background-color: #e9ebee;
   width: 20%;
   height: 90vh;
 `;

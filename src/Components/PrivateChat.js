@@ -48,7 +48,6 @@ const PrivateChat = props =>{
   }
 
   return (
-    
     <DragAndDrop x={100} y={100} >
     <Container>
       <ChatHeadder> 
@@ -86,6 +85,7 @@ const PrivateChat = props =>{
       }
     </Container>
   </DragAndDrop>
+  
   )
 }
 
