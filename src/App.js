@@ -61,6 +61,7 @@ const WebChat = props => {
         id: newPrivateChat.id
       }
       SetPrivateChatsObj({...privateChatsObj})
+      handleUserClick(newPrivateChat)
     }
   }
 
