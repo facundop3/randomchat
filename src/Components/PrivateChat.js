@@ -21,8 +21,7 @@ const Container = styled.div`
     width: 30vw ;
     position: absolute;
     display: block;
-    background-color: white;
-    border: 1px solid;
+
 `
 
 const ChatMessages = styled.div`
@@ -34,6 +33,8 @@ const ChatMessages = styled.div`
 `
 const MessagesBox = styled.div`
   height:80%;
+  background-color: white;
+  border: 1px solid;
 `
 
 const PrivateChat = props =>{
