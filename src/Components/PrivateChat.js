@@ -21,14 +21,19 @@ const Container = styled.div`
     width: 30vw ;
     position: absolute;
     display: block;
+    background-color: white;
+    border: 1px solid;
 `
 
 const ChatMessages = styled.div`
-  height: calc(90% - 1em);
-  width: calc(100% - 1em);
+  height: 95%;
+  width: calc(100% - calc(1em + 2px));
   margin: 0%;
   padding: .5em;
-  background-color: grey;
+  overflow:scroll;
+`
+const MessagesBox = styled.div`
+  height:80%;
 `
 
 const PrivateChat = props =>{
@@ -66,7 +71,7 @@ const PrivateChat = props =>{
       </ChatHeadder>
       {
 
-       !isMinimized && <div>
+       !isMinimized && <MessagesBox>
                           <ChatMessages>
                             {messages && messages.map(({content, isOutbound}, index, list) => 
                                 <SweetChatBubble 
@@ -81,7 +86,7 @@ const PrivateChat = props =>{
                             cleanAfter
                             sendMessage={sendMessage} 
                           />
-                        </div>         
+                        </MessagesBox>         
       }
     </Container>
   </DragAndDrop>
