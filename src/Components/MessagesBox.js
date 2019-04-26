@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
-    height: 90%;
+    height: 95%;
     display: inline-block;
     width: 100%;
     padding: 0 .5em;

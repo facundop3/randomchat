@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import API from './API'
 
 // Components
-import { UserList } from './Components/BaseComponents'
-import User from './Components/User'
+import UserList from './Components/UsersList'
 import MessageForm from './Components/MessageForm'
 import MessagesBox from './Components/MessagesBox'
 import Login from './Components/Login'
@@ -22,14 +21,13 @@ const MainContainer = styled.div`
 
 const LeftBox = styled.div`
   width: 80%;
-  height: 90vh;
-  overflow: hidden;
+  height: 90%;
   background-color: white;
 `
 const RightBox = styled.div`
   background-color: #e9ebee;
   width: 20%;
-  height: 90vh;
+  height: 90%;
 `;
 
 const WebChat = props => {
@@ -114,17 +112,7 @@ const WebChat = props => {
       </LeftBox>
       <RightBox>
         <SearchUser handleChange={handleSearchUserChange} inputValue={searchUserValue}/>
-        <UserList>
-          {
-            usersList.filter(({username}) => 
-              username && username.toLowerCase().includes(searchUserValue.toLowerCase())).map(({username, id})=> 
-                 <User username={username} 
-                       handleClick={handleUserClick} 
-                       id={id}
-                       key={id}
-                       />)
-          }
-        </UserList>
+        <UserList users={usersList} filter={searchUserValue} handleUserClick={handleUserClick}/>
       </RightBox>
     </MainContainer>
     )

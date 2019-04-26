@@ -5,9 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 // Font Awesome stuff 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimes, faPaperPlane, faWindowMinimize, faSearch, faUserAstronaut } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPaperPlane, faWindowMinimize, faSearch, faUserAstronaut,faFrownOpen } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTimes, faPaperPlane,faWindowMinimize, faSearch, faUserAstronaut)
+library.add(faTimes, faPaperPlane,faWindowMinimize, faSearch, faUserAstronaut, faFrownOpen)
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

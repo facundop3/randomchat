@@ -22,9 +22,9 @@ const UsernameP = styled.p`
     margin-left: 1em;
 `
 const User = props => {
-  const{img, username, handleClick, id} = props
+  const{img, username, handleClick, id, faIcon="user-astronaut", iconColor="#95ca3e"} = props
   const startPrivateChat = ()=>{
-    handleClick({id, username})
+    handleClick && handleClick({id, username})
   }
   return (
     <Container onClick={startPrivateChat}>
@@ -33,8 +33,8 @@ const User = props => {
         <Avatar img={img}/> 
         :
         <FontAwesomeIcon
-          icon="user-astronaut"
-          color="#95ca3e"
+          icon={faIcon}
+          color={iconColor}
         />
       }
       <UsernameP>{username}</UsernameP>
