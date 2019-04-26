@@ -18,11 +18,10 @@ const LoginTitle = styled.h1`
 const Login = props => {
 
   const handleSubmit = inputValue => {
-
-    if(inputValue){
+    if(inputValue && /\S/.test(inputValue)){
       API.registerUser(inputValue) 
+      props.setHideLogin(true)
     }
-    props.setHideLogin(true)
   }
 
   return (

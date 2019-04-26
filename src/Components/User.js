@@ -13,6 +13,10 @@ const Avatar = styled.div`
 const Container = styled.li`
   display: flex;
   align-items: center;
+  border: .5px solid grey;
+  border-radius: 8px;
+  padding: .5em;
+  margin: .25em;
 `
 const UsernameP = styled.p`
     margin-left: 1em;

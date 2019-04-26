@@ -35,8 +35,10 @@ const PrivateChat = props =>{
   const {userObject:{id, messages, username}, handleClose} = props
   const [isMinimized, setIsMinimized] = useState(false)
   const sendMessage = messageValue =>{
-    const messageObj = {id, message: {content:messageValue, isOutbound:true}}
-    API.sendPrivateMessage(messageObj)
+    if(messageValue && /\S/.test(messageValue)){
+      const messageObj = {id, message: {content:messageValue, isOutbound:true}}
+      API.sendPrivateMessage(messageObj)
+    }
   }
 
   const handleMin = ev =>{
@@ -68,7 +70,7 @@ const PrivateChat = props =>{
                           <ChatMessages>
                             {messages && messages.map(({content, isOutbound}, index, list) => 
                                 <SweetChatBubble 
-                                  key={Date.now()} 
+                                  key={Date.now()+ index} 
                                   message={content} 
                                   isSecond={index && Boolean(isOutbound) === Boolean(list[index -1].isOutbound)} 
                                   isLeft={!isOutbound}/>

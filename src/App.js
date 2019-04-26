@@ -46,7 +46,6 @@ const WebChat = props => {
   }
   const updateMessagesList = (messageToAdd) => {
     setMessageList(messagesList.concat(messageToAdd))
-    console.log(messagesList)
   }
 
   const updateUsersList = (newUsersList) => {
@@ -56,14 +55,14 @@ const WebChat = props => {
   const  updatePrivateChatsList = (newPrivateChat)=>{
     if(privateChatsObj[newPrivateChat.id]){
       privateChatsObj[newPrivateChat.id].messages.push(newPrivateChat.message)
-      SetPrivateChatsObj(privateChatsObj)
+      SetPrivateChatsObj({...privateChatsObj})
     } else {
       privateChatsObj[newPrivateChat.id] = {
         messages: [newPrivateChat.message],
         username: newPrivateChat.username,
         id: newPrivateChat.id
       }
-      SetPrivateChatsObj(privateChatsObj)
+      SetPrivateChatsObj({...privateChatsObj})
     }
   }
 
@@ -84,8 +83,9 @@ const WebChat = props => {
   }, [privateChatsObj])
 
   const sendMessage =  messageValue =>{
-    API.sendMessage(messageValue)
-
+    if(messageValue && /\S/.test(messageValue)){
+      API.sendMessage(messageValue)
+    }
   }
 
   const handleUserClick = user =>{
@@ -103,7 +103,7 @@ const WebChat = props => {
   return (
       <MainContainer>
         {
-         Object.keys(privateChatsObj).map(chatId=> privateChatsObj[chatId] && <PrivateChat userObject={privateChatsObj[chatId]}  handleClose={closePrivatChat}/>) 
+         Object.keys(privateChatsObj).map(chatId=> privateChatsObj[chatId] && <PrivateChat userObject={privateChatsObj[chatId]}  handleClose={closePrivatChat} key={chatId}/>) 
         }
        { 
          !hiddeLogin &&  <Login setHideLogin={setHideLogin}/>
@@ -118,7 +118,11 @@ const WebChat = props => {
           {
             usersList.filter(({username}) => 
               username && username.toLowerCase().includes(searchUserValue.toLowerCase())).map(({username, id})=> 
-                 <User username={username} handleClick={handleUserClick} id={id}/>)
+                 <User username={username} 
+                       handleClick={handleUserClick} 
+                       id={id}
+                       key={id}
+                       />)
           }
         </UserList>
       </RightBox>
