@@ -8,8 +8,9 @@ import DragAndDrop from './DragAndDrop'
 import SweetChatBubble from './SweetChatBubble'
 
 const ChatHeadder= styled.div`
-  height: 1em;
-  width: calc(100% - 2em);
+  height: 2em;
+  width: 100%;
+  box-sizing: border-box;
   background-color: rebeccapurple;
   color: white;
   justify-content: space-between;
@@ -26,7 +27,7 @@ const Container = styled.div`
 
 const ChatMessages = styled.div`
   height: 95%;
-  width: calc(100% - calc(1em + 2px));
+  width: 100%;
   margin: 0%;
   padding: .5em;
   overflow:scroll;

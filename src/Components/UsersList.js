@@ -4,8 +4,9 @@ import styled from 'styled-components'
 import User from './User'
 
 const Container = styled.ul`
-  width: calc(100% - 2em);
+  width: 100%;
   padding: 1em;
+  box-sizing: border-box;
 `
 const UsersList = props =>{
   const {users, handleUserClick, filter} = props

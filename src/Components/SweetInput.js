@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const InputText = styled.input`
-  width: calc(100% - 1em);
-  height: calc(100% - 1em);
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
   background-color: white;
   border: 1.5px solid grey;
   border-radius:5px;
@@ -21,9 +22,10 @@ const iconStyle = {
 
 const Container = styled.div`
     border-radius:5px;
-    width: calc(100% - 1em);
+    width: 100%;
     background-color: ${({bgColor})=> bgColor};
     padding:  .5em;
+    box-sizing: border-box;
 `
 
 

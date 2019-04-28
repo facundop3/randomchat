@@ -13,7 +13,7 @@ import SearchUser from './Components/SearchUser'
 
 const MainContainer = styled.div`
   height: 100vh;
-  background: #e6ecf0;
+  background: #e9ebee;
   display: flex;
   align-items: center;
   justify-content: center;
