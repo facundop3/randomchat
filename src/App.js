@@ -34,12 +34,25 @@ const WebChat = props => {
 
   const [messagesList, setMessageList] = useState([])
   const [usersList, setUsersList] = useState([])
-  const [privateChatsList, SetPrivateChatsList] = useState([])
+  const [privateChats, setPrivateChats] = useState({chatsIds:[]})
   const [searchUserValue, setSearchUserValue] = useState('')
   const [hiddeLogin, setHideLogin] = useState(false)
 
-  const closePrivatChat = id => {
-    SetPrivateChatsList(privateChatsList.filter(elem => elem !== id))
+  const  updatePrivateChat = (newPrivateChat)=>{
+    const {message,id} = newPrivateChat
+    if(privateChats.chatsIds.includes(id)){
+      if(privateChats.hasOwnProperty(id)){
+        privateChats[id].messages = [...privateChats[id].messages, message]
+      } else {
+        privateChats[id] = {}
+        privateChats[id].messages = [message]
+      }
+    } else {
+      privateChats.chatsIds = [...privateChats.chatsIds, id]
+      privateChats[id] = {}
+      privateChats[id].messages = [message]
+    }
+    setPrivateChats({...privateChats})
   }
 
   const updateMessagesList = (messageToAdd) => {
@@ -56,13 +69,16 @@ const WebChat = props => {
   }
 
   useEffect(()=>{
-    console.log("Suscribe to public messages")
     API.suscribeToMessages(updateMessagesList)
+    API.suscribeToPrivateMessages(updatePrivateChat)
   }, [])
 
   useEffect(()=>{
     API.suscribeToUsers(updateUsersList)
   }, [usersList])
+
+  useEffect(()=>{
+  }, [privateChats])
 
   const sendMessage =  messageValue =>{
     if(messageValue && /\S/.test(messageValue)){
@@ -70,17 +86,28 @@ const WebChat = props => {
     }
   }
 
-  const handleUserClick = user =>{
-    if(! privateChatsList.includes(user.id)){
-      privateChatsList.push(user.id)
+  const toggleUserChatIsOpen = (listOfUsers, userId) =>{
+    return listOfUsers.map(user =>{
+      if(user.id === userId) {
+        return {
+          ...user,
+          isOpen: ! user.isOpen
+        }
       }
-      SetPrivateChatsList([...privateChatsList])
+      return user
+    })
+  }
+
+  const handleUserClick = (id) =>{
+      setUsersList(toggleUserChatIsOpen(usersList, id))
   }
   const showPrivateChats = () =>{
-   return  usersList.map(({id, username}) => <PrivateChat id={id} 
-                                                          username={username}
-                                                          handleClose={closePrivatChat}
-                                                          key={id}/> ) 
+   return  usersList.filter(({isOpen})=> isOpen).map(({id, username}) => <PrivateChat 
+                                                                            id={id} 
+                                                                            username={username}
+                                                                            handleClose={handleUserClick}
+                                                                            privateMessages={privateChats[id] && privateChats[id].messages}
+                                                                            key={id}/> ) 
   }
   
   return (

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import API from '../API'
@@ -41,25 +41,15 @@ const MessagesBox = styled.div`
 `
 
 const PrivateChat = props =>{
-  const {id, username, handleClose} = props
+  const {id, username, handleClose, privateMessages} = props
   // States
   const [isMinimized, setIsMinimized] = useState(false)
-  const [privateMessages, setPrivateMessages] = useState([])
   const sendMessage = messageValue =>{
     if(messageValue && /\S/.test(messageValue)){
       const messageObj = {id , message: {content:messageValue, isOutbound:true}}
       API.sendPrivateMessage(messageObj)
     }
   }
-
-  const  updatePrivateChat = (newPrivateChat)=>{
-    privateMessages.push(newPrivateChat)
-    setPrivateMessages([...privateMessages])
-  }
-
-  useEffect(()=>{
-    API.suscribeToPrivateMessages(updatePrivateChat)
-  }, [])
 
   const handleMin = ev =>{
     setIsMinimized(!isMinimized)
@@ -89,7 +79,7 @@ const PrivateChat = props =>{
        !isMinimized && <MessagesBox>
                           <ChatMessages>
                             { 
-                              privateMessages.map(({message:{content, isOutbound}}, index, list) => 
+                              privateMessages && privateMessages.map(({content, isOutbound}, index, list) => 
                                 <SweetChatBubble 
                                   key={Date.now()+ index} 
                                   message={content} 

@@ -24,7 +24,7 @@ const UsernameP = styled.p`
 const User = props => {
   const{img, username, handleClick, id, faIcon="user-astronaut", iconColor="#95ca3e"} = props
   const startPrivateChat = ()=>{
-    handleClick && handleClick({id, username})
+    handleClick && handleClick(id)
   }
   return (
     <Container onClick={startPrivateChat}>
