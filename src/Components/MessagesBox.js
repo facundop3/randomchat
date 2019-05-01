@@ -6,6 +6,7 @@ const Container = styled.div`
     display: inline-block;
     width: 100%;
     padding: 0 .5em;
+    overflow: scroll;
 `
 const MessagesBox = props=>{
   const { messagesList } = props

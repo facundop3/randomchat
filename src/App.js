@@ -31,38 +31,24 @@ const RightBox = styled.div`
 `;
 
 const WebChat = props => {
+
   const [messagesList, setMessageList] = useState([])
   const [usersList, setUsersList] = useState([])
-  const [privateChatsObj, SetPrivateChatsObj] = useState({})
+  const [privateChatsList, SetPrivateChatsList] = useState([])
   const [searchUserValue, setSearchUserValue] = useState('')
   const [hiddeLogin, setHideLogin] = useState(false)
-  const [selectedUser, setSelectedUser] = useState({})
 
   const closePrivatChat = id => {
-    delete privateChatsObj[id]
-    SetPrivateChatsObj({...privateChatsObj})
+    SetPrivateChatsList(privateChatsList.filter(elem => elem !== id))
   }
+
   const updateMessagesList = (messageToAdd) => {
-    setMessageList(messagesList.concat(messageToAdd))
+    messagesList.push(messageToAdd)
+    setMessageList([...messagesList])
   }
 
   const updateUsersList = (newUsersList) => {
     setUsersList(newUsersList)
-  }
-
-  const  updatePrivateChatsList = (newPrivateChat)=>{
-    if(privateChatsObj[newPrivateChat.id]){
-      privateChatsObj[newPrivateChat.id].messages.push(newPrivateChat.message)
-      SetPrivateChatsObj({...privateChatsObj})
-    } else {
-      privateChatsObj[newPrivateChat.id] = {
-        messages: [newPrivateChat.message],
-        username: newPrivateChat.username,
-        id: newPrivateChat.id
-      }
-      SetPrivateChatsObj({...privateChatsObj})
-      handleUserClick(newPrivateChat)
-    }
   }
 
   const handleSearchUserChange = ({target:{value: username}}) => {
@@ -70,16 +56,13 @@ const WebChat = props => {
   }
 
   useEffect(()=>{
+    console.log("Suscribe to public messages")
     API.suscribeToMessages(updateMessagesList)
-  }, [messagesList])
+  }, [])
 
   useEffect(()=>{
     API.suscribeToUsers(updateUsersList)
   }, [usersList])
-
-  useEffect(()=>{
-    API.suscribeToPrivateMessages(updatePrivateChatsList)
-  }, [privateChatsObj])
 
   const sendMessage =  messageValue =>{
     if(messageValue && /\S/.test(messageValue)){
@@ -88,21 +71,22 @@ const WebChat = props => {
   }
 
   const handleUserClick = user =>{
-    setSelectedUser(user)
-    if(! privateChatsObj[user.id]){
-      privateChatsObj[user.id] = {
-        messages: [],
-        username: user.username,
-        id: user.id
+    if(! privateChatsList.includes(user.id)){
+      privateChatsList.push(user.id)
       }
-      SetPrivateChatsObj(privateChatsObj)
-    }
+      SetPrivateChatsList([...privateChatsList])
   }
-
+  const showPrivateChats = () =>{
+   return  usersList.map(({id, username}) => <PrivateChat id={id} 
+                                                          username={username}
+                                                          handleClose={closePrivatChat}
+                                                          key={id}/> ) 
+  }
+  
   return (
       <MainContainer>
         {
-         Object.keys(privateChatsObj).map(chatId=> privateChatsObj[chatId] && <PrivateChat userObject={privateChatsObj[chatId]}  handleClose={closePrivatChat} key={chatId}/>) 
+         showPrivateChats()
         }
        { 
          !hiddeLogin &&  <Login setHideLogin={setHideLogin}/>

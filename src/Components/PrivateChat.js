@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import API from '../API'
@@ -22,6 +22,7 @@ const Container = styled.div`
     width: 30vw ;
     position: absolute;
     display: block;
+    z-index: 1;
 
 `
 
@@ -31,6 +32,7 @@ const ChatMessages = styled.div`
   margin: 0%;
   padding: .5em;
   overflow:scroll;
+  box-sizing: border-box;
 `
 const MessagesBox = styled.div`
   height:80%;
@@ -39,14 +41,25 @@ const MessagesBox = styled.div`
 `
 
 const PrivateChat = props =>{
-  const {userObject:{id, messages, username}, handleClose} = props
+  const {id, username, handleClose} = props
+  // States
   const [isMinimized, setIsMinimized] = useState(false)
+  const [privateMessages, setPrivateMessages] = useState([])
   const sendMessage = messageValue =>{
     if(messageValue && /\S/.test(messageValue)){
-      const messageObj = {id, message: {content:messageValue, isOutbound:true}}
+      const messageObj = {id , message: {content:messageValue, isOutbound:true}}
       API.sendPrivateMessage(messageObj)
     }
   }
+
+  const  updatePrivateChat = (newPrivateChat)=>{
+    privateMessages.push(newPrivateChat)
+    setPrivateMessages([...privateMessages])
+  }
+
+  useEffect(()=>{
+    API.suscribeToPrivateMessages(updatePrivateChat)
+  }, [])
 
   const handleMin = ev =>{
     setIsMinimized(!isMinimized)
@@ -75,13 +88,15 @@ const PrivateChat = props =>{
 
        !isMinimized && <MessagesBox>
                           <ChatMessages>
-                            {messages && messages.map(({content, isOutbound}, index, list) => 
+                            { 
+                              privateMessages.map(({message:{content, isOutbound}}, index, list) => 
                                 <SweetChatBubble 
                                   key={Date.now()+ index} 
                                   message={content} 
                                   isSecond={index && Boolean(isOutbound) === Boolean(list[index -1].isOutbound)} 
                                   isLeft={!isOutbound}/>
-                              )}
+                              )
+                            }
                           </ChatMessages>
 
                           <MessageForm
