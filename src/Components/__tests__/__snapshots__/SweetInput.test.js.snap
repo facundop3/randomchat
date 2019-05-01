@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SweetInput renders correctly 1`] = `
+<styled.div>
+  <form
+    onSubmit={[Function]}
+    style={
+      Object {
+        "position": "relative",
+      }
+    }
+  >
+    <FontAwesomeIcon
+      border={false}
+      className=""
+      color="#2ca5e0"
+      fixedWidth={false}
+      flip={null}
+      icon="paper-plane"
+      inverse={false}
+      listItem={false}
+      mask={null}
+      pull={null}
+      pulse={false}
+      rotation={null}
+      size={null}
+      spin={false}
+      style={
+        Object {
+          "padding": "5.5px",
+          "position": "absolute",
+          "right": 0,
+        }
+      }
+      symbol={false}
+      title=""
+      transform={null}
+    />
+    <styled.input
+      onChange={[Function]}
+      onClick={[Function]}
+      placeholder=""
+      type="text"
+      value=""
+    />
+  </form>
+</styled.div>
+`;

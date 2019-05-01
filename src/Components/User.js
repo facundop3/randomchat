@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import Badge from './Badge'
 const Avatar = styled.div`
   border-radius: 50%;
   height: 3em;
@@ -19,7 +19,7 @@ const Container = styled.li`
   margin: .25em;
 `
 const UsernameP = styled.p`
-    margin-left: 1em;
+    margin: 1em;
 `
 const User = props => {
   const{img, username, handleClick, id, faIcon="user-astronaut", iconColor="#95ca3e"} = props
@@ -38,6 +38,9 @@ const User = props => {
         />
       }
       <UsernameP>{username}</UsernameP>
+      {
+        id && <Badge number={10} />
+      }
     </Container>
   )
 }
