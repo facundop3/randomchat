@@ -26,7 +26,7 @@ const Login = props => {
 
   return (
     <Container>
-      <LoginTitle>Enter your nickname</LoginTitle>
+      <LoginTitle>Chat as a guest</LoginTitle>
       <SweetInput 
         placeholder="Sally Ride"
         handleSubmit={handleSubmit}

@@ -39,7 +39,7 @@ const User = props => {
       }
       <UsernameP>{username}</UsernameP>
       {
-        id && <Badge number={10} />
+        // id && <Badge number={10} />
       }
     </Container>
   )

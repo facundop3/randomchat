@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
-//Api
 import API from './API'
-
-// Components
 import UserList from './Components/UsersList'
 import MessageForm from './Components/MessageForm'
 import MessagesBox from './Components/MessagesBox'
