@@ -8,11 +8,15 @@ const Container = styled.div`
     padding: 0 .5em;
     overflow: scroll;
 `
+const UsernameLink = styled.a`
+    text-decoration: none;
+    color: #0366d6;
+`
 const MessagesBox = props=>{
   const { messagesList } = props
   return <Container>
     {
-      messagesList.map(({message, username}, index) => <h1 key={Date.now()+ index}>{`${username}: ${message}`}</h1>)
+      messagesList.map(({message, username}, index) => <h1 key={Date.now()+ index}><UsernameLink>{username}: </UsernameLink>{message}</h1>)
     }
   </Container>
 }

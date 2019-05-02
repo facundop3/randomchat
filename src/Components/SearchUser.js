@@ -1,20 +1,16 @@
 import React from 'react'
-import SweetInput from './SweetInput'
-
+import TextField from "@material-ui/core/TextField";
 const SearchUser = props =>{
 
-  const {handleChange, inputValue, bgColor} = props
+  const {handleChange, inputValue} = props
 
-  return  <SweetInput
-            hotAction
-            bgColor={bgColor}
-            hotValue={inputValue}
-            handleChange={handleChange}
-            placeholder="Search user"
-            faIcon="search"
-            iconColor="#66757f"
-          />
-
+  return   <TextField
+              id="standard-name"
+              label="Search"
+              value={inputValue}
+              onChange={handleChange}
+              margin="normal"/>
+  
 }
 
 export default SearchUser

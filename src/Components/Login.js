@@ -14,7 +14,15 @@ const Container = styled.div`
 const LoginTitle = styled.h1`
   text-align: center;
 `
+const Wrapper = styled.div`
+  width: 100vw;
+  height: calc(100vh - 64px);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+`
 const Login = props => {
 
   const handleSubmit = inputValue => {
@@ -25,6 +33,8 @@ const Login = props => {
   }
 
   return (
+    <Wrapper>
+
     <Container>
       <LoginTitle>Chat as a guest</LoginTitle>
       <SweetInput 
@@ -34,6 +44,7 @@ const Login = props => {
         iconColor="#95ca3e"
       />
     </Container>
+    </Wrapper>
   )
 
 }

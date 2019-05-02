@@ -11,8 +11,10 @@ const ChatHeadder= styled.div`
   height: 2em;
   width: 100%;
   box-sizing: border-box;
-  background-color: rebeccapurple;
+  border-top: 2px solid #6a0080;
+  background-color: #9c27b0;
   color: white;
+  font-weight: bold;
   justify-content: space-between;
   display:flex;
   padding: .5em 1em;
@@ -37,7 +39,6 @@ const ChatMessages = styled.div`
 const MessagesBox = styled.div`
   height:80%;
   background-color: white;
-  border: 1px solid;
 `
 
 const PrivateChat = props =>{
@@ -64,7 +65,7 @@ const PrivateChat = props =>{
         <span>{username}</span>
         <div>
           <FontAwesomeIcon
-          icon="window-minimize"
+          icon={isMinimized ? "square" : "window-minimize"}
           onClick={handleMin}
           style={{marginRight: ".5em"}}
           />
