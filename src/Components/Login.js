@@ -21,6 +21,8 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(0,0,0,.1);
+  z-index: 1;
 
 `
 const Login = props => {

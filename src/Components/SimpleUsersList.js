@@ -22,10 +22,7 @@ const styles = theme => ({
 
 function AlignItemsList(props) {
   const { classes, users, handleUserClick, filter } = props
-  console.log(users)
   const matches = users.filter(({username}) => username && username.toLowerCase().includes(filter.toLowerCase()))
-  console.log("matches")
-  console.log(matches)
   return (
     <List className={classes.root}>
       {

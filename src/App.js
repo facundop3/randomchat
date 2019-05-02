@@ -10,6 +10,7 @@ import SearchUser from './Components/SearchUser'
 
 import SimpleAppBar from './Components/SimpleAppBar'
 import SimpleUsersList from './Components/SimpleUsersList'
+import SimpleCard from './Components/SimpleCard'
 
 const MainContainer = styled.div`
   height: 100vh;
@@ -24,14 +25,13 @@ const AppContainer = styled.div`
 
 const LeftBox = styled.div`
   width: 80%;
-  height: 90%;
-  /* background-color: white; */
+  height: 94%;
 `
 const RightBox = styled.div`
-  background-color: #fff;
   width: 20%;
-  height: 90%;
-`;
+`
+
+
 
 const WebChat = props => {
 
@@ -128,8 +128,10 @@ const WebChat = props => {
           <MessageForm  sendMessage={sendMessage} />
         </LeftBox>
         <RightBox>
-          <SearchUser handleChange={handleSearchUserChange} inputValue={searchUserValue}/>
-          <SimpleUsersList users={usersList} filter={searchUserValue} handleUserClick={handleUserClick}/>
+          <SimpleCard>
+            <SearchUser handleChange={handleSearchUserChange} inputValue={searchUserValue}/>
+            <SimpleUsersList users={usersList} filter={searchUserValue} handleUserClick={handleUserClick}/>
+          </SimpleCard>
         </RightBox>
         </AppContainer>
     </MainContainer>
