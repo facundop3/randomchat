@@ -1,13 +1,13 @@
 {
   "main.css": "/randomchat/static/css/main.d8cd24dd.chunk.css",
-  "main.js": "/randomchat/static/js/main.70ebe54a.chunk.js",
-  "main.js.map": "/randomchat/static/js/main.70ebe54a.chunk.js.map",
+  "main.js": "/randomchat/static/js/main.f0137ade.chunk.js",
+  "main.js.map": "/randomchat/static/js/main.f0137ade.chunk.js.map",
   "runtime~main.js": "/randomchat/static/js/runtime~main.b7fae7fb.js",
   "runtime~main.js.map": "/randomchat/static/js/runtime~main.b7fae7fb.js.map",
   "static/js/2.4cc84eb1.chunk.js": "/randomchat/static/js/2.4cc84eb1.chunk.js",
   "static/js/2.4cc84eb1.chunk.js.map": "/randomchat/static/js/2.4cc84eb1.chunk.js.map",
   "index.html": "/randomchat/index.html",
-  "precache-manifest.55fed117684876e013c0b8990ff15b36.js": "/randomchat/precache-manifest.55fed117684876e013c0b8990ff15b36.js",
+  "precache-manifest.39023c8c38d0bf93c98bc05e0e52478c.js": "/randomchat/precache-manifest.39023c8c38d0bf93c98bc05e0e52478c.js",
   "service-worker.js": "/randomchat/service-worker.js",
   "static/css/main.d8cd24dd.chunk.css.map": "/randomchat/static/css/main.d8cd24dd.chunk.css.map"
 }
