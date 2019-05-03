@@ -11,8 +11,7 @@ const ChatHeadder= styled.div`
   height: 2em;
   width: 100%;
   box-sizing: border-box;
-  border-top: 2px solid #6a0080;
-  background-color: #9c27b0;
+  background-image: linear-gradient(45deg, #662d8c, #ed1e79);
   color: white;
   font-weight: bold;
   justify-content: space-between;
@@ -20,16 +19,17 @@ const ChatHeadder= styled.div`
   padding: .5em 1em;
 `
 const Container = styled.div`
-    height: 40vh;
+    height: ${ props => props.isMinimized ? "0vh" :"40vh"};
     width: 30vw ;
     position: absolute;
     display: block;
     z-index: 1;
+    box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.15);
 
 `
 
 const ChatMessages = styled.div`
-  height: 95%;
+  height: 85%;
   width: 100%;
   margin: 0%;
   padding: .5em;
@@ -37,7 +37,7 @@ const ChatMessages = styled.div`
   box-sizing: border-box;
 `
 const MessagesBox = styled.div`
-  height:80%;
+  height:91%;
   background-color: white;
 `
 
@@ -60,7 +60,7 @@ const PrivateChat = props =>{
   }
   return (
     <DragAndDrop x={100} y={100} >
-    <Container>
+    <Container isMinimized={isMinimized}>
       <ChatHeadder> 
         <span>{username}</span>
         <div>

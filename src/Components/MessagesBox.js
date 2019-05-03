@@ -10,7 +10,7 @@ const Container = styled.div`
 `
 const UsernameLink = styled.a`
     text-decoration: none;
-    color: #0366d6;
+    color: #fff;
 `
 const MessagesBox = props=>{
   const { messagesList } = props

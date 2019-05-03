@@ -8,7 +8,6 @@ const MessageForm = props => {
       handleSubmit={sendMessage}
       cleanAfter
       placeholder="Input your message"
-      bgColor="lightblue"
     />
   )
 }

@@ -42,9 +42,9 @@ function AlignItemsList(props) {
               primary="No users online"
               secondary={
                 <React.Fragment>
-                  <a href="https://www.youtube.com/watch?v=MX6MvV8cbh8" target="_blank">
+                  <a href="https://www.youtube.com/watch?v=MX6MvV8cbh8" target="_blank"  rel="noopener noreferrer">
                     <Typography component="span" className={classes.inline} color="textPrimary">
-                      So lonely, so lonely, so lonely <samp>🎶</samp>
+                      So lonely, so lonely, so lonely <span role="img" aria-label="Music">🎶</span>
                     </Typography>
                   </a>
                 </React.Fragment>

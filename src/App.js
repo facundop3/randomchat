@@ -14,7 +14,7 @@ import SimpleCard from './Components/SimpleCard'
 
 const MainContainer = styled.div`
   height: 100vh;
-  background: #e9ebee;
+  background-image: linear-gradient(45deg, #2e3192, #1bffff);
 `
 const AppContainer = styled.div`
 /* Todo look for a better way of fixing the height */
@@ -26,6 +26,7 @@ const AppContainer = styled.div`
 const LeftBox = styled.div`
   width: 80%;
   height: 94%;
+  box-sizing: border-box;
 `
 const RightBox = styled.div`
   width: 20%;

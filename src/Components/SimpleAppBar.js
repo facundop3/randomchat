@@ -9,17 +9,21 @@ const styles = {
   root: {
     flexGrow: 1,
   },
+  headerStyle:{
+    backgroundImage: "linear-gradient(45deg, #662d8c, #ed1e79)",
+  }
 };
+
 
 function SimpleAppBar(props) {
   const { classes } = props;
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+      <AppBar position="static" className={classes.headerStyle}>
         <Toolbar>
-          <Typography variant="h6" color="inherit">
-            # General
+          <Typography variant="h6">
+           <span style={{color: "#fff"}}> # General </span>
           </Typography>
         </Toolbar>
       </AppBar>

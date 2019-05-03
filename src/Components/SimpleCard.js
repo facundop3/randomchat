@@ -4,7 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 
 function SimpleCard(props) {
   return (
-    <Card style={{height: "100%"}}>
+    <Card style={{height: "100%", borderRadius:0}}>
       <CardContent>
         {props.children}
       </CardContent>
