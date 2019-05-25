@@ -1,27 +1,30 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Container = styled.div`
-    width: 100%;
-    padding: 1em;
-    box-sizing: border-box;
-`
+  width: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+`;
 
 function SearchUser(props) {
-  const {handleChange, inputValue} = props
+  const { handleChange, inputValue, labelText } = props;
   return (
     <Container>
-      <TextField
-        id="standard-name"
-        label="Search user"
-        value={inputValue}
-        style={{ width: "100%" }}
-        onChange={handleChange}
-        margin="normal"
-      />
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search an user"
+          aria-label={labelText}
+          aria-describedby="basic-addon1"
+          value={inputValue}
+          onChange={handleChange}
+          margin="normal"
+        />
+      </div>
     </Container>
-  )
+  );
 }
 
-export default SearchUser
+export default SearchUser;

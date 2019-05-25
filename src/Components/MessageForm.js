@@ -1,15 +1,15 @@
-import React from 'react'
-import SweetInput from './SweetInput'
+import React from "react";
+import SweetInput from "./SweetInput";
 
 const MessageForm = props => {
-  const {sendMessage} = props
+  const { sendMessage } = props;
   return (
-    <SweetInput 
+    <SweetInput
       handleSubmit={sendMessage}
       cleanAfter
       placeholder="Input your message"
     />
-  )
-}
+  );
+};
 
-export default MessageForm
+export default MessageForm;
