@@ -20,7 +20,6 @@ const ChatHeadder = styled.div`
 `;
 const Container = styled.div`
   height: ${props => (props.isMinimized ? "0vh" : "40vh")};
-  width: 30vw;
   position: absolute;
   display: block;
   z-index: 1;

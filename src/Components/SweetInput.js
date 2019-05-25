@@ -28,9 +28,6 @@ const SweetInput = props => {
       className="col-12"
     >
       <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">@</span>
-        </div>
         {hotAction ? (
           <input
             type="text"

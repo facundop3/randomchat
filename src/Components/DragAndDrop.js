@@ -96,7 +96,7 @@ class Draggable extends React.Component {
   render() {
     return (
       <div
-        className="col-4 col-sm-12"
+        className="col-12"
         onMouseDown={this.onMouseDown}
         onTouchStart={this.onTouchStart}
         style={{
