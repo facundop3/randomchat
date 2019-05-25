@@ -1,5 +1,5 @@
 import openSocket from "socket.io-client";
-const socket = openSocket("http://randombla.herokuapp.com/");
+const socket = openSocket("https://randombla.herokuapp.com/");
 
 function suscribeToMessages(callback) {
   socket.on("new-message", newMessage => callback(newMessage));
